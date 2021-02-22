@@ -1,7 +1,7 @@
 {
   "name": "workshop",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "template.js",
   "license": "MIT",
   "scripts": {
     "start": "ts-node template.ts"

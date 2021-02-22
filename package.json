@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "ts-node template.ts"
+  },
   "dependencies": {
     "@requestnetwork/epk-signature": "^0.5.27",
     "@requestnetwork/payment-processor": "^0.30.2",

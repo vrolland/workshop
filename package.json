@@ -1,0 +1,14 @@
+{
+  "name": "workshop",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@requestnetwork/epk-signature": "^0.5.27",
+    "@requestnetwork/payment-processor": "^0.30.2",
+    "@requestnetwork/request-client.js": "^0.32.0",
+    "ethers": "4.0.48",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
+  }
+}

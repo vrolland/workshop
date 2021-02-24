@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@requestnetwork/epk-signature": "^0.5.27",
-    "@requestnetwork/payment-processor": "^0.30.2",
+    "@requestnetwork/payment-processor": "^0.31.0",
     "@requestnetwork/request-client.js": "^0.32.0",
     "ethers": "4.0.48",
     "ts-node": "^9.1.1",

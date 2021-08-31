@@ -1,0 +1,58 @@
+version: "3.2"
+
+services:
+  request-node:
+    image: requestnetwork/request-node:latest
+    container_name: request-node
+    ports:
+      - 3200:3200
+    # override the default command
+    # wait for request-contracts to terminate before starting the node
+    # Without this, the node crashes as it starts before contracts are deployed
+    command: sh -c "while ping -c1 request-contracts &>/dev/null; do echo \"wait for request-contracts\";sleep 1; done; echo \"Contracts ready\" && node /node/node_modules/@requestnetwork/request-node/dist/server.js"
+    environment:
+      # DEBUG: "express:*"
+      IPFS_HOST: ipfs
+      IPFS_PORT: 5001
+      IPFS_TIMEOUT: 5000
+      ETHEREUM_NETWORK_ID: 0
+      WEB3_PROVIDER_URL: http://ganache:8545
+      MNEMONIC: "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat"
+      PORT: 3200
+    depends_on:
+      - ipfs
+      - ganache
+      - request-contracts
+
+  ipfs:
+    image: requestnetwork/request-ipfs:0.4.23-1
+    container_name: ipfs
+    ports:
+      - 5001:5001
+    volumes:
+      - ipfs_staging:/export
+      - ipfs_data:/data/ipfs
+
+  ganache:
+    image: trufflesuite/ganache-cli
+    container_name: ganache
+    ports:
+      - 8545:8545
+    command:
+      - "-l"
+      - "90000000"
+      - "-m"
+      - "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat"
+
+  request-contracts:
+    image: eu.gcr.io/request-240714/request-network:f5cb9f3
+    container_name: request-contracts
+    command: yarn --cwd packages/smart-contracts run deploy
+    environment:
+      TRUFFLE_GANACHE_HOST: ganache
+    depends_on:
+      - ganache
+
+volumes:
+  ipfs_staging:
+  ipfs_data:

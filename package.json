@@ -1,16 +1,17 @@
 {
   "name": "workshop",
   "version": "1.0.0",
-  "main": "template.js",
+  "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node template.ts"
+    "start": "ts-node index.ts",
+    "build": "tsc index.ts"
   },
   "dependencies": {
-    "@requestnetwork/epk-signature": "^0.5.27",
-    "@requestnetwork/payment-processor": "^0.31.0",
-    "@requestnetwork/request-client.js": "^0.32.0",
-    "ethers": "4.0.48",
+    "@requestnetwork/epk-signature": "^0.5.34",
+    "@requestnetwork/payment-processor": "^0.37.0",
+    "@requestnetwork/request-client.js": "^0.39.0",
+    "ethers": "~5.1.4",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.3"
   }

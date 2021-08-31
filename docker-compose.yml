@@ -25,13 +25,10 @@ services:
       - request-contracts
 
   ipfs:
-    image: requestnetwork/request-ipfs:0.4.23-1
+    image: requestnetwork/request-ipfs:0.4.23-2
     container_name: ipfs
     ports:
       - 5001:5001
-    volumes:
-      - ipfs_staging:/export
-      - ipfs_data:/data/ipfs
 
   ganache:
     image: trufflesuite/ganache-cli
@@ -39,20 +36,21 @@ services:
     ports:
       - 8545:8545
     command:
-      - "-l"
-      - "90000000"
       - "-m"
       - "candy maple cake sugar pudding cream honey rich smooth crumble sweet treat"
 
   request-contracts:
-    image: eu.gcr.io/request-240714/request-network:f5cb9f3
+    image: requestnetwork/request-contracts:latest
     container_name: request-contracts
-    command: yarn --cwd packages/smart-contracts run deploy
+    command: # wait for ganache to be started
+      - "./wait-for"
+      - "ganache:8545"
+      - "--"
+      - "./node_modules/.bin/hardhat"
+      - "deploy"
+      - "--network"
+      - "web3"
     environment:
-      TRUFFLE_GANACHE_HOST: ganache
+      WEB3_URL: ganache
     depends_on:
       - ganache
-
-volumes:
-  ipfs_staging:
-  ipfs_data:

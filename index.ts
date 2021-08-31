@@ -90,13 +90,8 @@ const requestNetwork = new RequestNetwork.RequestNetwork({
 const paymentNetwork: RequestNetwork.Types.Payment.IPaymentNetworkCreateParameters =
   {};
 
-// ✏️ The main request info (currency, amount, payee identity and payer identity)
-const requestInfo: RequestNetwork.Types.IRequestInfo = {
-  currency: "TestER20",
-  expectedAmount: "1", // NB this should actually be ethers.utils.parseEther("1")
-  payee: payeeIdentity,
-  payer: payerIdentity,
-};
+// ✏️ The main request info: 1 TestERC20 from Payee to Payer
+const requestInfo: RequestNetwork.Types.IRequestInfo = {};
 //#endregion
 
 (async () => {
